@@ -6,4 +6,12 @@
     <string name="btn_favorite">ИЗБРАННОЕ</string>
     <string name="btn_selection">ПОДБОРКИ</string>
     <string name="btn_settings">НАСТРОЙКИ</string>
+
+
+    <string name="menu_letter">ПОСМОТРЕТЬ ПОЗЖЕ</string>
+    <string name="menu_favorite">ИЗБРАННОЕ</string>
+    <string name="menu_selection">ПОДБОРКИ</string>
+    <string name="menu_settings">НАСТРОЙКИ</string>
+
+    <string name="page_title">ПОИСК!</string>
 </resources>
