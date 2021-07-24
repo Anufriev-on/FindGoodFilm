@@ -36,11 +36,11 @@
 
 
         <TextView
-            android:id="@+id/text_view"
+            android:id="@+id/disclaimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
             android:text="@string/disclaimer"
             android:autoLink="web"
             android:linksClickable="true"
@@ -51,7 +51,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/top_container"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="80dp"
             android:layout_margin="10dp"
             app:cardCornerRadius="15dp"
             android:elevation="5dp"
@@ -104,88 +104,15 @@
 
 
 
-        <GridLayout
-            android:layoutAnimation="@anim/layout_anim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recycler"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_margin="16dp"
-            android:columnCount="4"
-            android:orientation="horizontal"
-            android:useDefaultMargins="true"
-            app:layout_constraintTop_toBottomOf="@+id/text_view"
+            app:layout_constraintTop_toBottomOf="@+id/disclaimer"
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-
-
-            <androidx.cardview.widget.CardView
-                android:clickable="true"
-                android:stateListAnimator="@animator/press_poster"
-                android:id="@+id/anim_poster_1"
-                android:layout_width="75dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="15dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/animposter1"
-                    android:scaleType="centerCrop"/>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:clickable="true"
-                android:stateListAnimator="@animator/press_poster"
-                android:id="@+id/anim_poster_2"
-                android:layout_width="75dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="15dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/animposter2"
-                    android:scaleType="centerCrop"/>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:clickable="true"
-                android:stateListAnimator="@animator/press_poster"
-                android:id="@+id/anim_poster_3"
-                android:layout_width="75dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="15dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/animposter3"
-                    android:scaleType="centerCrop"/>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:clickable="true"
-                android:stateListAnimator="@animator/press_poster"
-                android:id="@+id/anim_poster_4"
-                android:layout_width="75dp"
-                android:layout_height="100dp"
-                app:cardCornerRadius="15dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/animposter4"
-                    android:scaleType="centerCrop"/>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-
-        </GridLayout>
+            app:layout_constraintRight_toRightOf="parent"/>
 
 
 
