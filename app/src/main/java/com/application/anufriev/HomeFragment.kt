@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
+
+
+class HomeFragment : Fragment() {
+
 val filmsDataBase = listOf(
     Film("Wheel of Time", R.drawable.poster10, "Set in a high fantasy world where magic exists, but only some can access it, a woman named Moiraine crosses paths with five young men and women. This sparks a dangerous, world-spanning journey. Based on the book series by Robert Jordan."),
     Film("The Auschwitz Report", R.drawable.poster11, "This is the true story of Freddy and Walter - two young Slovak Jews, who were deported to Auschwitz in 1942. On 10 April 1944, after meticulous planning and with the help and the resilience of their inmates, they manage to escape. While the inmates, they had left behind, courageously stand their ground against the Nazi officers, the two men are driven on by the hope that their evidence could save lives. Emaciated and hurt, they make their way through the mountains back to Slovakia. With the help of chance encounters, they finally manage to cross the border and meet the resistance and The Red Cross. They compile a detailed report about the systematic genocide at the camp. However, with Nazi propaganda and international liaisons still in place, their account seems to be too harrowing to believe."),
@@ -29,16 +33,17 @@ val filmsDataBase = listOf(
 lateinit var filmsAdapter: FilmListRecyclerAdapter
 
 
-
-
-
-class HomeFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.fragment_details, container, false)
+    }
 
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         //находим наш RV
         main_recycler.apply {
@@ -49,17 +54,7 @@ class HomeFragment : Fragment() {
 
             filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
                 override fun click(film: Film) {
-                    //Создаем бандл и кладем туда объект с данными фильма
-                    val bundle = Bundle()
-                    //Первым параметром указывается ключ, по которому потом будем искать, вторым сам
-                    //передаваемый объект
-                    bundle.putParcelable("film", film)
-                    //Запускаем наше активити
-                    val intent = Intent(requireContext(), DetailsFragment::class.java)
-                    //Прикрепляем бандл к интенту
-                    intent.putExtras(bundle)
-                    //Запускаем активити через интент
-                    startActivity(intent)
+                    (requireActivity() as MainActivity).launchDetailsFragment(film)
                 }
             })
 
@@ -72,27 +67,10 @@ class HomeFragment : Fragment() {
             val decorator = TopSpacingItemDecoration(8)
             addItemDecoration(decorator)
 
-
-
-
-
-
         }
 
 //Кладем нашу БД в RV
         filmsAdapter.addItems(filmsDataBase)
 
-
-
-
-
-
-
-
-
-
-
-        return inflater.inflate(R.layout.fragment_details, container, false)
     }
-
 }

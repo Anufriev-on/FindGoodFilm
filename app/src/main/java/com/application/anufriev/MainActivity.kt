@@ -12,30 +12,45 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import androidx.fragment.app.FragmentActivity
 
 
-class MainActivity : FragmentActivity() {
-
+class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initNavigation()
+
+        //Запускаем фрагмент
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
+
+    }
 
 
 
+    fun launchDetailsFragment(film: Film) {
+        //Создаем "посылку"
+        val bundle = Bundle()
+        //Кладем наш фильм в "посылку"
+        bundle.putParcelable("film", film)
+        //Кладем фрагмент с деталями в перменную
+        val fragment = DetailsFragment()
+        //Прикрепляем нашу "посылку" к фрагменту
+        fragment.arguments = bundle
 
-        topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.settings -> {
-                    Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
-            }
-        }
+        //Запускаем фрагмент
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 
-
-
+    private fun initNavigation() {
 
         bottom_navigation.setOnNavigationItemSelectedListener {
 
@@ -55,82 +70,8 @@ class MainActivity : FragmentActivity() {
                 else -> false
             }
         }
-
-
-        //находим наш RV
-        main_recycler.apply {
-
-
-
-
-
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-                override fun click(film: Film) {
-                    (requireActivity() as MainActivity).launchDetailsFragment(film)
-                }
-            })
-
-            //Присваиваем адаптер
-            adapter = filmsAdapter
-            //Присвои layoutmanager
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            //Применяем декоратор для отступов
-            val decorator = TopSpacingItemDecoration(8)
-            addItemDecoration(decorator)
-
-
-
-
-
-
-        }
-
-//Кладем нашу БД в RV
-        filmsAdapter.addItems(filmsDataBase)
-
-
-
-
-
-
-
-
-
-
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragment_placeholder, HomeFragment())
-            .addToBackStack(null)
-            .commit()
-
-
-
-
-
-
-
-
-
-
-        fun launchDetailsFragment(film: Film) {
-            //Создаем "посылку"
-            val bundle = Bundle()
-            //Кладем наш фильм в "посылку"
-            bundle.putParcelable("film", film)
-            //Кладем фрагмент с деталями в перменную
-            val fragment = DetailsFragment()
-            //Прикрепляем нашу "посылку" к фрагменту
-            fragment.arguments = bundle
-
-            //Запускаем фрагмент
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_placeholder, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
-
-
     }
+
+
 }
+
