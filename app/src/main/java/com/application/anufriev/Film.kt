@@ -2,7 +2,6 @@ package com.application.anufriev
 
 
 
-
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 

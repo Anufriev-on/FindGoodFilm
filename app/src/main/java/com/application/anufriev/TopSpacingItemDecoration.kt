@@ -1,5 +1,6 @@
 package com.application.anufriev
 
+
 import android.content.res.Resources
 import android.graphics.Rect
 import android.view.View

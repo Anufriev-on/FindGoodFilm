@@ -1,19 +1,11 @@
 package com.application.anufriev
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_home.*
-
-
-import androidx.fragment.app.FragmentActivity
-
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,16 +13,14 @@ class MainActivity : AppCompatActivity() {
 
         initNavigation()
 
-        //Запускаем фрагмент
+        //Зупускаем фрагмент при старте
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_placeholder, HomeFragment())
+            .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
 
     }
-
-
 
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
@@ -55,8 +45,12 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
-                R.id.menu_fav -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
+                R.id.menu_fav-> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_placeholder, FavoritesFragment())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
                 R.id.menu_letter -> {
@@ -71,7 +65,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
-
