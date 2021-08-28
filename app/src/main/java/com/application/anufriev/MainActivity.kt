@@ -3,6 +3,7 @@ package com.application.anufriev
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,27 +41,62 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
+    }
+
+
+
     private fun initNavigation() {
 
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
                 R.id.menu_fav-> {
-                    supportFragmentManager
+                    val tag = "menu_fav"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: FavoritesFragment(), tag)
+
+
+          /*          supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_placeholder, FavoritesFragment())
                         .addToBackStack(null)
-                        .commit()
+                        .commit()                */
                     true
                 }
                 R.id.menu_letter -> {
+                    val tag = "menu_letter"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: WatchLeterFragment(), tag)
+
+
                     Toast.makeText(this, "Посмотреть похже", Toast.LENGTH_SHORT).show()
                     true
-                }
+                  }
                 R.id.menu_selection -> {
+                    val tag = "menu_selection"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: SelectionsFragment(), tag)
+
+
                     Toast.makeText(this, "Подборки", Toast.LENGTH_SHORT).show()
                     true
                 }
+                R.id.home -> {
+                    val tag = "home"
+                    val fragment = checkFragmentExistence(tag)
+                    //В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
+                    //элвиса мы вызываем создание нового фрагмента
+                    changeFragment( fragment?: HomeFragment(), tag)
+                    true}
                 else -> false
             }
         }

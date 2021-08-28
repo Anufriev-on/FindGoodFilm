@@ -2,11 +2,6 @@ package com.application.anufriev
 
 
 import android.os.Bundle
-import android.transition.Scene
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.transition.TransitionSet
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +9,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.merge_home_screen_content.*
+import com.application.anufriev.AnimationHelper.AnimationHelper
+import androidx.recyclerview.widget.RecyclerView
+
 import java.util.*
+
+
 
 class HomeFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
@@ -32,6 +31,12 @@ class HomeFragment : Fragment() {
         Film("1917", R.drawable.poster19, "April 6th, 1917. As a regiment assembles to wage war deep in enemy territory, two soldiers are assigned to race against time and deliver a message that will stop 1,600 men from walking straight into a deadly trap.")
     )
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,37 +49,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
-
-        val scene = Scene.getSceneForLayout(home_fragment_root, R.layout.merge_home_screen_content, requireContext())
-//Создаем анимацию выезда поля поиска сверху
-        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
-//Создаем анимацию выезда RV снизу
-        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
-//Создаем экземпляр TransitionSet, который объединит все наши анимации
-        val customTransition = TransitionSet().apply {
-            //Устанавливаем время, за которое будет проходить анимация
-            duration = 500
-            //Добавляем сами анимации
-            addTransition(recyclerSlide)
-            addTransition(searchSlide)
-        }
-//Также запускаем через TransitionManager, но вторым параметром передаем нашу кастомную анимацию
-        TransitionManager.go(scene, customTransition)
-
-
-
-
-
-
-
-
-
-
-
-
-
+        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 4)
 
 
 
@@ -120,7 +95,7 @@ class HomeFragment : Fragment() {
                         (requireActivity() as MainActivity).launchDetailsFragment(film)
                     }
                 })
-            //Присваиваем адаптер
+                             //Присваиваем адаптер
             adapter = filmsAdapter
             //Присвои layoutmanager
             layoutManager = LinearLayoutManager(requireContext())
