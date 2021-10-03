@@ -1,7 +1,8 @@
-package com.application.anufriev
+package com.application.anufriev.view.rv_viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.application.anufriev.domain.Film
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.film_item.view.*
 

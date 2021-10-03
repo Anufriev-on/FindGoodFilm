@@ -1,4 +1,4 @@
-package com.application.anufriev
+package com.application.anufriev.utils
 
 import android.app.Activity
 import android.view.View

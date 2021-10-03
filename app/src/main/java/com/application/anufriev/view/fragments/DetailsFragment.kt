@@ -1,4 +1,4 @@
-package com.application.anufriev
+package com.application.anufriev.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.application.anufriev.R
+import com.application.anufriev.domain.Film
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/watch_later_window"
-    tools:context=".WatchLeterFragment"
+    tools:context=".view.fragments.WatchLeterFragment"
     android:id="@+id/watch_leter_fragment_root"
     android:visibility="visible"
     tools:visibility="visible">

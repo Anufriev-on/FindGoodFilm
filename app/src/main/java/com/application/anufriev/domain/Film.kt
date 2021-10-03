@@ -1,4 +1,4 @@
-package com.application.anufriev
+package com.application.anufriev.domain
 
 
 

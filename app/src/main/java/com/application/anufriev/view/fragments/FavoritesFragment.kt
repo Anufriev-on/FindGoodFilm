@@ -1,4 +1,4 @@
-package com.application.anufriev
+package com.application.anufriev.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.application.anufriev.view.rv_adapters.FilmListRecyclerAdapter
+import com.application.anufriev.MainActivity
+import com.application.anufriev.R
+import com.application.anufriev.view.rv_adapters.TopSpacingItemDecoration
+import com.application.anufriev.domain.Film
+import com.application.anufriev.utils.AnimationHelper
 import kotlinx.android.synthetic.main.fragment_favorites.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_selections.*
 
 class FavoritesFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
@@ -31,7 +35,7 @@ class FavoritesFragment : Fragment() {
         val favoritesList: List<Film> = emptyList()
 
         favorites_recycler.apply {
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                 override fun click(film: Film) {
                     (requireActivity() as MainActivity).launchDetailsFragment(film)
                 }
