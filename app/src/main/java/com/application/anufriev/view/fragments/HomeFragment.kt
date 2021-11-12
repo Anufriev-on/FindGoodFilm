@@ -15,9 +15,12 @@ import com.application.anufriev.MainActivity
 import com.application.anufriev.R
 import com.application.anufriev.view.rv_adapters.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.*
-import com.application.anufriev.utils.AnimationHelper.AnimationHelper
+import com.application.anufriev.utils.AnimationHelper
 import com.application.anufriev.domain.Film
 import com.application.anufriev.viewmodel.HomeFragmentViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
+
+import com.application.anufriev.databinding.FragmentHomeBinding
 
 import java.util.*
 
@@ -29,7 +32,7 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
-
+    private lateinit var binding: FragmentHomeBinding
     private var filmsDataBase = listOf<Film>()
         //Используем backing field
         set(value) {
@@ -76,28 +79,48 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 4)
-
         initSearchView()
-
         //находим наш RV
+
+        initPullToRefresh()
+
         initRecyckler()
         //Кладем нашу БД в RV
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
             filmsDataBase = it
+            filmsAdapter.addItems(it)
         })
 
+
+
+
+
     }
+
+
+
+
+
+    private fun initPullToRefresh() {
+        //Вешаем слушатель, чтобы вызвался pull to refresh
+        binding.pullToRefresh.setOnRefreshListener {
+            //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+            filmsAdapter.items.clear()
+            //Делаем новый запрос фильмов на сервер
+            viewModel.getFilms()
+            //Убираем крутящееся колечко
+            binding.pullToRefresh.isRefreshing = false
+        }
+    }
+
 
 
     private fun initSearchView() {
@@ -149,5 +172,11 @@ class HomeFragment : Fragment() {
             addItemDecoration(decorator)
         }
     }
+
+
+
+
+
+
 
 }

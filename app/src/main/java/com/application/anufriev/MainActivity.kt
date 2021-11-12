@@ -99,6 +99,12 @@ class MainActivity : AppCompatActivity() {
                     //элвиса мы вызываем создание нового фрагмента
                     changeFragment( fragment?: HomeFragment(), tag)
                     true}
+                R.id.settings -> {
+                    val tag = "settings"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment( fragment?: SettingsFragment(), tag)
+                    true
+                }
                 else -> false
             }
         }

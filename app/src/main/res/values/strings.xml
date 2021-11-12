@@ -13,7 +13,15 @@
     <string name="menu_selection">ПОДБОРКИ</string>
     <string name="menu_settings">НАСТРОЙКИ</string>
     <string name="menu_home_title_text">ДОМОЙ</string>
+    <string name="menu_settings_title_text">КАТЕГОРИИ</string>
 
+
+
+    <string name="radio_button_popular">Популярные</string>
+    <string name="radio_button_top_rated">Топ</string>
+    <string name="radio_button_upcoming">Скоро</string>
+    <string name="radio_button_playing">В кинотеатрах</string>
+    <string name="radio_group_header">Подборка на главном экране:</string>
 
     <string name="page_title">ПОИСК!</string>
 

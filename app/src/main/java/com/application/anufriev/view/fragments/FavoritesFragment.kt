@@ -28,7 +28,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(), 1)
+        AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(), 1)
 
 
         //Получаем список при транзакции фрагмента

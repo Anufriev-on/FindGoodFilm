@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.application.anufriev.R
-import com.application.anufriev.utils.AnimationHelper.AnimationHelper
+import com.application.anufriev.utils.AnimationHelper
 import kotlinx.android.synthetic.main.fragment_selections.*
 
 
