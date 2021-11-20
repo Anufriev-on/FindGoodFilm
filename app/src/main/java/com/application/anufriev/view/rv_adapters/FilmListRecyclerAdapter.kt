@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.anufriev.view.rv_viewholders.FilmViewHolder
 import com.application.anufriev.R
-import com.application.anufriev.domain.Film
+import com.application.anufriev.data.Entity.Film
 import kotlinx.android.synthetic.main.film_item.view.*
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити

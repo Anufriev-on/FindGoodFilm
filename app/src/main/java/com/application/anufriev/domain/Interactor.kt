@@ -1,7 +1,9 @@
 package com.application.anufriev.domain
 
 //import android.telecom.Call
+import androidx.lifecycle.LiveData
 import com.application.anufriev.data.*
+import com.application.anufriev.data.Entity.Film
 import com.application.anufriev.data.Entity.TmdbResults
 import com.application.anufriev.data.PreferenceProvider
 //import com.application.anufriev.data.MainRepository
@@ -26,9 +28,9 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
                 val list = Converter.convertApiListToDtoList(response.body()?.tmdbFilms)
                 //Кладем фильмы в бд
                 list.forEach {
-                    repo.putToDb(film = it)
+                    repo.putToDb(list)
                 }
-                callback.onSuccess(list)
+                callback.onSuccess()
             }
 
             override fun onFailure(call: Call<TmdbResults>, t: Throwable) {
@@ -39,7 +41,7 @@ class Interactor(private val repo: MainRepository, private val retrofitService: 
     }
 
 
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 
 
 

@@ -6,19 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.anufriev.view.rv_adapters.FilmListRecyclerAdapter
 import com.application.anufriev.MainActivity
-import com.application.anufriev.R
 import com.application.anufriev.view.rv_adapters.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.*
 import com.application.anufriev.utils.AnimationHelper
-import com.application.anufriev.domain.Film
+import com.application.anufriev.data.Entity.Film
 import com.application.anufriev.viewmodel.HomeFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_home.*
 
 import com.application.anufriev.databinding.FragmentHomeBinding
 
@@ -79,8 +78,15 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
+            binding.progressBar.isVisible = it
+        })
+
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,7 +104,6 @@ class HomeFragment : Fragment() {
             filmsDataBase = it
             filmsAdapter.addItems(it)
         })
-
 
 
 

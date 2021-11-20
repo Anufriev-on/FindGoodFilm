@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.application.anufriev.R
 import com.application.anufriev.data.ApiConstants
-import com.application.anufriev.domain.Film
+import com.application.anufriev.data.Entity.Film
 import com.bumptech.glide.Glide
 //import kotlinx.android.synthetic.main.fragment_details.*
 

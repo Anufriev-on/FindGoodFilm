@@ -10,7 +10,7 @@ import com.application.anufriev.view.rv_adapters.FilmListRecyclerAdapter
 import com.application.anufriev.MainActivity
 import com.application.anufriev.R
 import com.application.anufriev.view.rv_adapters.TopSpacingItemDecoration
-import com.application.anufriev.domain.Film
+import com.application.anufriev.data.Entity.Film
 import com.application.anufriev.utils.AnimationHelper
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
