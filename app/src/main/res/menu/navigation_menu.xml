@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menu_fav"
+        android:icon="@drawable/ic_baseline_electrical_services_24"
+        android:title="@string/menu_favorite"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_letter"
+        android:icon="@drawable/ic_baseline_engineering_24"
+        android:title="@string/menu_letter"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/menu_selection"
+        android:icon="@drawable/ic_baseline_flash_on_24"
+        android:title="@string/menu_selection"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/menu_home_title_text"/>
+
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/menu_settings_title_text"
+        app:showAsAction="withText"/>
+
+
+</menu>
