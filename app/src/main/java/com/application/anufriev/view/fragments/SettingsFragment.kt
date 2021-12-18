@@ -13,7 +13,7 @@ import com.application.anufriev.utils.AnimationHelper
 
 
 import com.application.anufriev.viewmodel.SettingsFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_settings.*
+//import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
@@ -32,7 +32,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Подключаем анимации и передаем номер позиции у кнопки в нижнем меню
-        AnimationHelper.performFragmentCircularRevealAnimation(settings_fragment_root, requireActivity(), 5)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.settingsFragmentRoot, requireActivity(), 5)
         //Слушаем, какой у нас сейчас выбран вариант в настройках
         viewModel.categoryPropertyLifeData.observe(viewLifecycleOwner, Observer<String> {
             when(it) {

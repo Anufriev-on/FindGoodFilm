@@ -14,12 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.anufriev.view.rv_adapters.FilmListRecyclerAdapter
 import com.application.anufriev.MainActivity
 import com.application.anufriev.view.rv_adapters.TopSpacingItemDecoration
-import kotlinx.android.synthetic.main.fragment_home.*
+//import kotlinx.android.synthetic.main.fragment_home.*
 import com.application.anufriev.utils.AnimationHelper
 import com.application.anufriev.data.Entity.Film
 import com.application.anufriev.viewmodel.HomeFragmentViewModel
 
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+
 import com.application.anufriev.databinding.FragmentHomeBinding
+import com.application.anufriev.utils.AutoDisposable
+import com.application.anufriev.utils.addTo
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 import java.util.*
 
@@ -28,9 +39,15 @@ import java.util.*
 class HomeFragment : Fragment() {
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
+
+    private lateinit var scope: CoroutineScope
+
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+
+    private val autoDisposable = AutoDisposable()
+
     private lateinit var binding: FragmentHomeBinding
     private var filmsDataBase = listOf<Film>()
         //Используем backing field
@@ -70,7 +87,9 @@ class HomeFragment : Fragment() {
  */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        autoDisposable.bindTo(lifecycle)
         retainInstance = true
+
     }
 
 
@@ -79,9 +98,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
-            binding.progressBar.isVisible = it
-        })
+  //      viewModel.showProgressBar.observe(viewLifecycleOwner, Observer<Boolean> {
+  //          binding.progressBar.isVisible = it
+   //     })
 
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -92,7 +111,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimationHelper.performFragmentCircularRevealAnimation(home_fragment_root, requireActivity(), 4)
+        AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 4)
         initSearchView()
         //находим наш RV
 
@@ -100,11 +119,21 @@ class HomeFragment : Fragment() {
 
         initRecyckler()
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
-        })
-
+        viewModel.filmsListLiveData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
+            }
+            .addTo(autoDisposable)
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
+            }
+            .addTo(autoDisposable)
 
 
 
@@ -129,12 +158,12 @@ class HomeFragment : Fragment() {
 
 
     private fun initSearchView() {
-        search_view.setOnClickListener {
-            search_view.isIconified = false
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
         }
 
         //Подключаем слушателя изменений введенного текста в поиска
-        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -161,7 +190,7 @@ class HomeFragment : Fragment() {
 
 
     private fun initRecyckler() {
-        main_recycler.apply {
+        binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
@@ -177,7 +206,6 @@ class HomeFragment : Fragment() {
             addItemDecoration(decorator)
         }
     }
-
 
 
 

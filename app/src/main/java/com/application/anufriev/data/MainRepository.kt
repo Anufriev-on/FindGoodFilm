@@ -1,11 +1,9 @@
 package com.application.anufriev.data
 
-import android.content.ContentValues
-import android.database.Cursor
-import androidx.lifecycle.LiveData
 import com.application.anufriev.data.DAO.FilmDao
-import com.application.anufriev.db.DatabaseHelper
 import com.application.anufriev.data.Entity.Film
+import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.Executors
 
 class MainRepository(private val filmDao: FilmDao) {
@@ -17,5 +15,5 @@ class MainRepository(private val filmDao: FilmDao) {
         }
     }
 
-    fun getAllFromDB(): LiveData<List<Film>> = filmDao.getCachedFilms()
+    fun getAllFromDB(): Observable<List<Film>> = filmDao.getCachedFilms()
 }
