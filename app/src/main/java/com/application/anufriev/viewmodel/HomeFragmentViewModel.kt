@@ -19,16 +19,12 @@ import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class HomeFragmentViewModel : ViewModel() {
- //   val filmsListLiveData:  MutableLiveData<List<Film>> = MutableLiveData()
-    //Инициализируем интерактор
-  //  private val interactor:  Interactor by inject()
 
 
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
     val showProgressBar: BehaviorSubject<Boolean>
-
     val filmsListLiveData: Observable<List<Film>>
 
     init {
@@ -42,8 +38,6 @@ class HomeFragmentViewModel : ViewModel() {
         interactor.getFilmsFromApi(1)
     }
 
- //   interface ApiCallback {
-   //     fun onSuccess()
-   //     fun onFailure()
-   // }
+
+    fun getSearchResult(search: String) = interactor.getSearchResultFromApi(search)
 }
