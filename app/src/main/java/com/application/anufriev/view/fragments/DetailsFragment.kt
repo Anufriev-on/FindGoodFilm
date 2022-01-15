@@ -15,9 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import com.application.anufriev.R
-import com.application.anufriev.data.ApiConstants
 import com.application.anufriev.data.Entity.Film
 import com.bumptech.glide.Glide
 //import kotlinx.android.synthetic.main.fragment_details.*
@@ -27,7 +25,8 @@ import com.application.anufriev.viewmodel.DetailsFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 //import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.coroutines.*
-import java.util.jar.Manifest
+import remote_module.entity.ApiConstants
+
 
 class DetailsFragment : Fragment() {
     private lateinit var film: Film
@@ -78,6 +77,13 @@ class DetailsFragment : Fragment() {
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
         }
+    }
+
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 
     private fun setFilmsDetails() {

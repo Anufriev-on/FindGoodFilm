@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.anufriev.App
 import com.application.anufriev.domain.Interactor
-import okhttp3.internal.Internal.instance
+//import okhttp3.internal.Internal.instance
 
 import javax.inject.Inject
 

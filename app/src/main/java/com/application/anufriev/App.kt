@@ -5,8 +5,9 @@ import com.application.anufriev.di.AppComponent
 import com.application.anufriev.di.DaggerAppComponent
 import com.application.anufriev.di.modules.DatabaseModule
 import com.application.anufriev.di.modules.DomainModule
-import com.application.anufriev.di.modules.RemoteModule
-import okhttp3.internal.Internal.instance
+import remote_module.DaggerRemoteComponent
+
+
 
 
 class App : Application() {
@@ -17,8 +18,9 @@ class App : Application() {
         super.onCreate()
         instance = this
         //Создаем компонент
+        val remoteProvider = DaggerRemoteComponent.create()
         dagger = DaggerAppComponent.builder()
-            .remoteModule(RemoteModule())
+            .remoteProvider(remoteProvider)
             .databaseModule(DatabaseModule())
             .domainModule(DomainModule(this))
             .build()

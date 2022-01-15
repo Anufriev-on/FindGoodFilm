@@ -1,7 +1,7 @@
 package com.application.anufriev.utils
 
-import com.application.anufriev.data.Entity.TmdbFilm
 import com.application.anufriev.data.Entity.Film
+import remote_module.entity.TmdbFilm
 
 object Converter {
     fun convertApiListToDtoList(list: List<TmdbFilm>?): List<Film> {

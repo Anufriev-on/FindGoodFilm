@@ -1,4 +1,4 @@
-package com.application.anufriev.data.Entity
+package remote_module.entity
 
 import com.google.gson.annotations.SerializedName
 

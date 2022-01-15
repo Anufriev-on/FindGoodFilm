@@ -2,10 +2,11 @@ package com.application.anufriev.view.rv_viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.application.anufriev.data.ApiConstants
 import com.application.anufriev.data.Entity.Film
 import com.application.anufriev.databinding.FilmItemBinding
 import com.bumptech.glide.Glide
+import remote_module.entity.ApiConstants
+
 //import kotlinx.android.synthetic.main.film_item.view.*
 
 //В конструктор класс передается layout, который мы создали(film_item.xml)

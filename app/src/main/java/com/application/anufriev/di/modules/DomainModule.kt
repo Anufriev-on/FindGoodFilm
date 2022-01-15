@@ -3,7 +3,7 @@ package com.application.anufriev.di.modules
 import android.content.Context
 import com.application.anufriev.data.MainRepository
 import com.application.anufriev.data.PreferenceProvider
-import com.application.anufriev.data.TmdbApi
+import remote_module.TmdbApi
 import com.application.anufriev.domain.Interactor
 import dagger.Module
 import dagger.Provides
