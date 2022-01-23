@@ -1,10 +1,14 @@
 package com.application.anufriev
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import com.application.anufriev.di.AppComponent
 import com.application.anufriev.di.DaggerAppComponent
 import com.application.anufriev.di.modules.DatabaseModule
 import com.application.anufriev.di.modules.DomainModule
+import com.application.anufriev.view.notifications.NotificationConstants.CHANNEL_ID
 import remote_module.DaggerRemoteComponent
 
 
@@ -24,6 +28,22 @@ class App : Application() {
             .databaseModule(DatabaseModule())
             .domainModule(DomainModule(this))
             .build()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //Задаем имя, описание и важность канала
+            val name = "WatchLaterChannel"
+            val descriptionText = "FilmsSearch notification Channel"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            //Создаем канал, передав в параметры его ID(строка), имя(строка), важность(константа)
+            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
+            //Отдельно задаем описание
+            mChannel.description = descriptionText
+            //Получаем доступ к менеджеру нотификаций
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            //Регистрируем канал
+            notificationManager.createNotificationChannel(mChannel)
+        }
+
     }
 
 

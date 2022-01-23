@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 //import kotlinx.android.synthetic.main.fragment_details.*
 
 import com.application.anufriev.databinding.FragmentDetailsBinding
+import com.application.anufriev.view.notifications.NotificationHelper
 import com.application.anufriev.viewmodel.DetailsFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 //import kotlinx.android.synthetic.main.fragment_details.*
@@ -76,6 +77,10 @@ class DetailsFragment : Fragment() {
 
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
+        }
+
+        binding.detailsFabWatchLater.setOnClickListener {
+            NotificationHelper.createNotification(requireContext(), film)
         }
     }
 
