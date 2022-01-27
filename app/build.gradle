@@ -87,4 +87,10 @@ dependencies {
 
     //Remote module
     implementation project(":remote_module")
+
+    def work_version = "2.5.0"
+// Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+// опционально - поддержка RxJava2
+    implementation "androidx.work:work-rxjava2:$work_version"
 }
