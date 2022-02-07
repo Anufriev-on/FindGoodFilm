@@ -1,2 +1,4 @@
 rootProject.name = "My First Application"
 include ':app'
+include ':remote_module'
+
